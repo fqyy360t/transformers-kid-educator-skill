@@ -156,6 +156,10 @@ Contributions are welcome! Here's how:
 
 This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
 
+## 📖 Usage Guide
+
+For a detailed walkthrough with screenshots and examples, see the [Usage Guide (使用说明)](https://vcnqyg6spyqg.feishu.cn/docx/DvxgdZFOhoVVEWxAU1scxA0cnze).
+
 ## 🙏 Acknowledgments
 
 - [Wan2.7 Image Skill](https://github.com/anthropics/wan2.7-image-skill) — AI image generation backbone
