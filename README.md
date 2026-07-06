@@ -46,7 +46,7 @@ An AI skill that uses beloved characters like **Transformers**, **Ultraman**, **
 
 ```bash
 # Clone the repo (wan2.7-image-skill is bundled — no separate install needed)
-git clone https://github.com/YOUR_USERNAME/transformers-kid-educator-skill.git
+git clone https://github.com/fqyy360t/transformers-kid-educator-skill.git
 cd transformers-kid-educator-skill
 ```
 
@@ -213,7 +213,7 @@ This project is licensed under the MIT License — see [LICENSE](LICENSE) for de
 
 ```bash
 # 克隆仓库（wan2.7-image-skill 已内置，无需单独安装）
-git clone https://github.com/YOUR_USERNAME/transformers-kid-educator-skill.git
+git clone https://github.com/fqyy360t/transformers-kid-educator-skill.git
 cd transformers-kid-educator-skill
 ```
 
