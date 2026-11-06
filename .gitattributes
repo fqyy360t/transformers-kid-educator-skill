@@ -1,0 +1,2 @@
+# SVG 是文本，固定用 LF，避免 Windows 检出时转成 CRLF 造成无意义 diff
+*.svg text eol=lf
