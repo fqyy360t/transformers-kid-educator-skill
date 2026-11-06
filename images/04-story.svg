@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="五幕故事结构与每幕对应的插图">
+  <rect width="1200" height="440" fill="#ffffff"/>
+  <text x="48" y="46" font-family="sans-serif" font-size="25" font-weight="700" fill="#111827">一个故事 = 五幕，每幕配一张图</text>
+  <text x="48" y="76" font-family="sans-serif" font-size="14" fill="#6b7280">以仓库里那份完整的「重力」剧本为例：知识点不是讲出来的，是孩子跟着角色一步步发现的。</text>
+
+  <g font-family="sans-serif">
+    <rect x="48" y="104" width="208" height="230" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+    <rect x="60" y="116" width="184" height="128" rx="8" fill="#dbeafe"/>
+    <circle cx="116" cy="184" r="26" fill="#3b82f6"/>
+    <circle cx="108" cy="180" r="4" fill="#ffffff"/><circle cx="124" cy="180" r="4" fill="#ffffff"/>
+    <rect x="92" y="212" width="48" height="20" rx="6" fill="#2563eb"/>
+    <circle cx="188" cy="190" r="20" fill="#fbbf24"/>
+    <circle cx="182" cy="186" r="3.5" fill="#ffffff"/><circle cx="194" cy="186" r="3.5" fill="#ffffff"/>
+    <rect x="170" y="212" width="36" height="16" rx="5" fill="#f59e0b"/>
+    <text x="68" y="270" font-size="13" font-weight="700" fill="#111827">① 任务来了</text>
+    <text x="68" y="292" font-size="11.5" fill="#6b7280">基地里抛出一个谜题：</text>
+    <text x="68" y="310" font-size="11.5" fill="#6b7280">东西为什么不往天上飞？</text>
+
+    <rect x="274" y="104" width="208" height="230" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+    <rect x="286" y="116" width="184" height="128" rx="8" fill="#dcfce7"/>
+    <path d="M286 218 Q378 178 470 218 L470 244 L286 244 Z" fill="#86efac"/>
+    <circle cx="378" cy="158" r="13" fill="#ef4444"/>
+    <path d="M378 174 L378 212" stroke="#dc2626" stroke-width="2" stroke-dasharray="5 4"/>
+    <rect x="330" y="206" width="34" height="24" rx="3" fill="#a3a3a3"/>
+    <text x="294" y="270" font-size="13" font-weight="700" fill="#111827">② 发现问题</text>
+    <text x="294" y="292" font-size="11.5" fill="#6b7280">斜坡上的箱子自己往下滑，</text>
+    <text x="294" y="310" font-size="11.5" fill="#6b7280">苹果从树上掉下来。</text>
+
+    <rect x="500" y="104" width="208" height="230" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+    <rect x="512" y="116" width="184" height="128" rx="8" fill="#fef3c7"/>
+    <rect x="524" y="128" width="70" height="44" rx="4" fill="#1f2937"/>
+    <path d="M532 160 L548 142 L566 160" stroke="#fde68a" stroke-width="2" fill="none"/>
+    <rect x="524" y="204" width="160" height="28" rx="4" fill="#d97706"/>
+    <circle cx="548" cy="196" r="9" fill="#ef4444"/>
+    <circle cx="578" cy="196" r="9" fill="#3b82f6"/>
+    <ellipse cx="612" cy="194" rx="14" ry="5" fill="#9ca3af"/>
+    <text x="520" y="270" font-size="13" font-weight="700" fill="#111827">③ 知识讲解</text>
+    <text x="520" y="292" font-size="11.5" fill="#6b7280">放手试苹果、小球、羽毛，</text>
+    <text x="520" y="310" font-size="11.5" fill="#6b7280">「看不见的大手」登场。</text>
+
+    <rect x="726" y="104" width="208" height="230" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+    <rect x="738" y="116" width="184" height="128" rx="8" fill="#e0f2fe"/>
+    <path d="M756 232 L800 160 L818 160 L818 232 Z" fill="#38bdf8"/>
+    <path d="M818 160 L900 232 L818 232 Z" fill="#7dd3fc"/>
+    <circle cx="806" cy="146" r="10" fill="#fbbf24"/>
+    <path d="M800 158 L800 190 L790 210" stroke="#f59e0b" stroke-width="4" fill="none"/>
+    <text x="746" y="270" font-size="13" font-weight="700" fill="#111827">④ 应用知识</text>
+    <text x="746" y="292" font-size="11.5" fill="#6b7280">滑梯、秋千、扔球，</text>
+    <text x="746" y="310" font-size="11.5" fill="#6b7280">让孩子自己找出重力。</text>
+
+    <rect x="952" y="104" width="200" height="230" rx="10" fill="#ffffff" stroke="#e5e7eb"/>
+    <rect x="964" y="116" width="176" height="128" rx="8" fill="#ffedd5"/>
+    <circle cx="1052" cy="164" r="28" fill="#fb923c"/>
+    <rect x="964" y="208" width="176" height="36" fill="#fed7aa"/>
+    <rect x="1010" y="180" width="84" height="48" rx="6" fill="#ffffff" stroke="#fdba74"/>
+    <text x="1018" y="200" font-size="10" fill="#9a3412">重力小知识</text>
+    <text x="1018" y="216" font-size="8" fill="#c2410c">看不见的大手</text>
+    <text x="970" y="270" font-size="13" font-weight="700" fill="#111827">⑤ 总结收尾</text>
+    <text x="970" y="292" font-size="11.5" fill="#6b7280">三条结论 + 右下角知识卡片，</text>
+    <text x="970" y="310" font-size="11.5" fill="#6b7280">再留给家长三个讨论题。</text>
+  </g>
+
+  <rect x="48" y="354" width="1104" height="64" rx="10" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="72" y="380" font-family="sans-serif" font-size="12.5" fill="#374151">完整对话、每幕的画面提示词、知识卡片文案与家长指南，见 FULL-EXAMPLE.md；把「重力」换成浮力就是新故事。</text>
+  <text x="72" y="402" font-family="sans-serif" font-size="11.5" fill="#6b7280">上图是结构示意，不是 Wan2.7 生成的成品插图；真实成品图在飞书文档里。</text>
+</svg>

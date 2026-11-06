@@ -1,173 +1,136 @@
-<div align="right">
+# 把知识讲成孩子爱听的故事：变形金刚儿童知识讲解员
 
-[English](README.md) | [中文](README_CN.md)
+![适用年龄](https://img.shields.io/badge/适用年龄-4--12岁-2ea44f?style=flat-square) ![版本](https://img.shields.io/badge/版本-2.0.0-blue?style=flat-square) ![组图](https://img.shields.io/badge/组图-3--5--8张-orange?style=flat-square) ![成品案例](https://img.shields.io/badge/成品案例-3个-8957e5?style=flat-square)
 
-</div>
+## [👉 先看飞书文档里的三个成品故事（含截图）↗](https://vcnqyg6spyqg.feishu.cn/docx/DvxgdZFOhoVVEWxAU1scxA0cnze)
 
-<div align="center">
+[![一句话变成一本带图儿童故事的五个步骤](images/01-overview.svg)](images/01-overview.svg)
 
-# 🤖 Transformers Kid Educator Skill
+**一句话**：对孩子说「用汪汪队讲讲苹果为什么会落地」，它会变成有角色、有对话、有插图、有提问的完整故事。
+这是一份给 AI 助手用的 Skill，面向 4–12 岁孩子；变形金刚、奥特曼、汪汪队、超级飞侠都能来讲课，插图由 Wan2.7 生成。
 
-**Turn boring lessons into epic animated adventures!**
-
-An AI skill that uses beloved characters like **Transformers**, **Ultraman**, **PAW Patrol**, **Super Wings**, and **Peppa Pig** to teach children aged 4–12 through engaging, story-driven lessons — with AI-generated storybook illustrations powered by Wan2.7.
-
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)]()
-[![Age](https://img.shields.io/badge/ages-4--12-green.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-yellow.svg)]()
-
-</div>
+[从哪里开始读](#从哪里开始阅读) · [看案例](#三个成品案例) · [怎么跑](#怎么跑) · [数字口径](#数字与口径) · [还差什么](#已知边界)
 
 ---
 
-## ✨ Features
+## 从哪里开始阅读
 
-- 🎭 **Smart Character Matching** — Automatically selects the best character for the child's age and topic (Optimus Prime for logic, Bumblebee for science, Ratchet for health & safety…)
-- 📖 **Story-Driven Learning** — Embeds knowledge into 3-act adventure narratives with real character dialogue
-- 🎨 **AI Image Generation** — Integrates with [Wan2.7](https://github.com/anthropics/wan2.7-image-skill) to generate sequential storybook illustrations (3/5/8 images)
-- 🧩 **Interactive Q&A** — Optional comprehension questions woven into the story
-- 🎯 **Personalized** — Adjustable difficulty, story length, character preference, and educational focus
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-| Requirement | Details |
+| 你现在想干什么 | 直接看这里 |
 |---|---|
-| **Wan2.7 Image Skill** | Included in `wan2.7-image-skill/` (bundled) |
-| **DASHSCOPE_API_KEY** | Set in your environment ([get one here](https://dashscope.console.aliyun.com/)) |
-| **Python 3.8+** | Required for image generation script |
+| 先看它到底能做出什么 | [飞书介绍文档](https://vcnqyg6spyqg.feishu.cn/docx/DvxgdZFOhoVVEWxAU1scxA0cnze) → [三个成品案例](#三个成品案例) |
+| 想马上试一句 | [怎么跑](#怎么跑) → [快速参考卡](QUICKSTART.md) |
+| 想看一份完整剧本 | [完整示例：讲重力](FULL-EXAMPLE.md) → [一个故事长什么样](#一个故事长什么样) |
+| 想改角色、模板、提示词 | [角色怎么配](#角色怎么配) → [SKILL.md](SKILL.md) → [角色语气指南](references/character-voices.md) |
+| 想知道哪些还没做 | [三个核心设计](#三个核心设计) → [已知边界](#已知边界) |
 
-### Installation
+## 这是什么问题
+
+给孩子讲知识，最难的不是「讲得对」，是「他愿意听」。直接说重力是万有引力，孩子三秒就走神；
+但如果阿奇拿着放大镜追查「苹果为什么掉下来」，他会跟着一路问下去。
+
+| 常见的麻烦 | 这份 Skill 怎么处理 |
+|---|---|
+| 不知道几岁该讲多深 | 年龄分 4–6 / 7–9 / 10–12 三档，句式和深度跟着变 |
+| 不知道哪个角色适合哪个知识点 | 角色与知识类型有默认匹配表，见 [角色怎么配](#角色怎么配) |
+| 故事和插图对不上，每张图角色都长得不一样 | 每幕写一条画面提示词，用 Wan2.7 的连贯组图模式一次出 3 / 5 / 8 张 |
+
+## 角色怎么配
+
+[![动画角色与知识类型的匹配关系](images/02-roles.svg)](images/02-roles.svg)
+
+默认匹配写在 `SKILL.md` 和 `references/requirements-gathering.md` 里；角色的说话方式单独放在 `references/character-voices.md`，
+改角色不用动故事框架。四套故事模板（解谜、探险、救援、穿越）在 `references/story-templates.md`。
+
+## 一个故事长什么样
+
+[![五幕故事结构与每幕对应的插图](images/04-story.svg)](images/04-story.svg)
+
+`FULL-EXAMPLE.md` 里有一份 7 岁、讲重力、5 幕 5 图的完整剧本：每幕的场景、角色对话、画面提示词、
+结尾的知识卡片、给家长的三个讨论题都写全了。把「重力」换成「浮力」或「水的三态」就是新故事。
+
+## 三个成品案例
+
+[![飞书文档里的三个成品案例](images/03-cases.svg)](images/03-cases.svg)
+
+下面三份是**飞书介绍文档里已经做好的成品**，都面向 7 岁孩子、都带互动问题，点开能看到故事全文和生成图：
+
+| 案例 | 年龄 / 篇幅 / 插图 | 成品文档 |
+|---|---|---|
+| 汪汪队阿奇探案：万有引力的秘密 | 7 岁 · 中篇 5 幕 · 5 张 | [打开](https://www.feishu.cn/docx/FevPdRtynox5r9x0h64cBBqZnrd) |
+| 天天飞上天看新年：年的故事 | 7 岁 · 长篇 8 幕 · 8 张 | [打开](https://www.feishu.cn/docx/FMAHdiHtWoFbKhxhpGDcjK5Lnyh) |
+| 流沙河悟净学知识：水的三种形态 | 7 岁 · 长篇 8 幕 · 8 张 | [打开](https://www.feishu.cn/docx/DFdVdykJnoKlbJxfKZbcPxdAnKc) |
+
+案例取自飞书《[介绍与功能展示](https://vcnqyg6spyqg.feishu.cn/docx/DvxgdZFOhoVVEWxAU1scxA0cnze)》的「功能展示」章节；
+文档里还贴了当时的 Wan2.7 提示词原文。**本仓库不附这些生成图片**，也不声称它们由本仓库脚本自动重跑过。
+
+## 三个核心设计
+
+1. **角色驱动**：按年龄和知识类型选角色，每个角色有自己的说话方式。**没有**做过儿童学习效果测评。
+2. **故事模板化**：三幕结构、四套模板、每幕一张图、结尾知识卡片。**没有**语音朗读、动画或视频。
+3. **组图生成**：集成 Wan2.7，一次出 3 / 5 / 8 张连贯插图。**没有**内置图片存储，也**没有**自动排版成飞书文档的脚本。
+
+## 怎么跑
+
+需要 Python 3.9 以上，以及阿里云百炼的 `DASHSCOPE_API_KEY`；出图会调用云端接口并计费。
 
 ```bash
-# Clone the repo (wan2.7-image-skill is bundled — no separate install needed)
 git clone https://github.com/fqyy360t/transformers-kid-educator-skill.git
-cd transformers-kid-educator-skill
+export DASHSCOPE_API_KEY="你的密钥"
 ```
 
-### Basic Usage
+接着二选一：把 SKILL.md 交给支持 Skill 的 AI 助手，直接说「用汪汪队给我 7 岁孩子讲万有引力」；
+或者复制 [QUICKSTART.md](QUICKSTART.md) 里五条现成的组图命令之一（浮力、重力、宇宙、交通安全都有），
+改掉 `--user_requirement` 就能用。`scripts/generate_story_images.py` 是同一条链路的桥接脚本。
 
-Just say any of these to your AI assistant:
+## 数字与口径
 
-```
-"Give a children's lesson about gravity with Transformers"
-"Ultraman teaches kids about the solar system"
-"Create a story for my 5-year-old about brushing teeth"
-"汪汪队教孩子过马路安全"
-```
-
-### Generate Story Images
-
-```bash
-cd scripts
-python generate_story_images.py
-```
-
-## 📚 How It Works
-
-```
-┌─────────────────┐    ┌──────────────────┐    ┌──────────────────┐
-│  1. Gather Info  │───▶│  2. Pick Character│───▶│  3. Create Story │
-│  age, topic,     │    │  Optimus? Bumble- │    │  3-act narrative │
-│  preferences     │    │  bee? Ultraman?   │    │  with dialogue   │
-└─────────────────┘    └──────────────────┘    └──────────────────┘
-                                                        │
-                                                        ▼
-                                               ┌──────────────────┐
-                                               │  4. Generate Art  │
-                                               │  Wan2.7 sequential│
-                                               │  image generation │
-                                               └──────────────────┘
-```
-
-1. **Requirements Gathering** — Collects child's age (4–6 / 7–9 / 10–12), topic type, character preference
-2. **Character Selection** — Matches topic to the ideal character (see table below)
-3. **Story Creation** — Generates a structured story with Problem → Exploration → Resolution
-4. **Image Generation** — Calls Wan2.7 API to produce storybook illustrations
-
-### Character-Topic Guide
-
-| Character | Best For | Why |
+| 数字 | 口径（范围 / 分母） | 来源 |
 |---|---|---|
-| 🔴 **Optimus Prime** | Math, Logic, Leadership | Wise, methodical, teaches through problem-solving |
-| 🟡 **Bumblebee** | Science, Nature, Exploration | Curious, energetic, makes discovery fun |
-| 🟢 **Ratchet** | Health, Safety, First Aid | Careful, knowledgeable, explains "why" clearly |
-| ⚡ **Ultraman** | Courage, Environmental Care | Gentle hero, inspires responsibility |
-| 🐾 **PAW Patrol** | Safety, Teamwork, Community | Relatable, action-oriented, emphasizes cooperation |
-| ✈️ **Super Wings** | Geography, Culture, Travel | Explores the world, introduces diversity |
+| 3 / 5 / 8 张图 | 快速参考卡里 5 条命令使用的 `--n` 取值，不是接口全部可选值 | [QUICKSTART.md](QUICKSTART.md) |
+| 4 套故事模板 | 模板库里 4 个模板章节：解谜、探险、救援、穿越 | [story-templates.md](references/story-templates.md) |
+| 3 档年龄 | 4–6 / 7–9 / 10–12 岁，各自规定句式、深度、节奏 | [requirements-gathering.md](references/requirements-gathering.md) |
+| 6 个默认角色 | 角色匹配表的 6 行；角色库另含威震天、小猪佩奇 | [SKILL.md](SKILL.md) |
+| 3 个成品案例 | 飞书介绍文档「功能展示」章节的 3 份独立成品文档，都是 7 岁 | [飞书文档](https://vcnqyg6spyqg.feishu.cn/docx/DvxgdZFOhoVVEWxAU1scxA0cnze) |
 
-## 📁 Project Structure
+这些数字来自仓库文件与飞书文档。**这次只做了文档整理，没有重新调用 Wan2.7 出图验证**，别把它们当成新跑出来的实验结果。
 
-```
-transformers-kid-educator-skill/
-├── SKILL.md                          # Main skill definition & workflow
-├── QUICKSTART.md                     # Quick-start reference card
-├── FULL-EXAMPLE.md                   # Worked example: teaching "gravity"
-├── README.md                         # English documentation
-├── README_CN.md                      # Chinese documentation
-├── wan2.7-image-skill/               # Wan2.7 image generation (bundled)
-│   ├── SKILL.md
-│   ├── scripts/
-│   └── references/
-├── references/
-│   ├── character-voices.md           # Dialogue style per character
-│   ├── image-prompts.md              # Image prompt library
-│   ├── requirements-gathering.md     # User requirements flow
-│   └── story-templates.md            # 4 reusable story templates
-└── scripts/
-    └── generate_story_images.py      # Wan2.7 image generation bridge
-```
+## 已知边界
 
-## 🎨 Story Templates
+- **不配密钥一定出不了图**：`DASHSCOPE_API_KEY` 为空时桥接脚本只给警告，真正请求会失败；离线状态下只能拿到故事文本和提示词。
+- **成品图不在仓库里**：三份案例的插图在飞书文档中，文档属于个人租户，未登录可能打不开。
+- **自动排版飞书文档没有实现**：飞书介绍里展示过「故事＋图片自动排版成文档」的效果，本仓库没有对应脚本，需要你用的 AI 工具自己完成。
+- **角色库没跟上案例**：西游记的沙和尚出现在案例三，但没有写进 `references/character-voices.md`。
+- **许可证文件缺失**：README 历史版本写过 MIT，仓库里**没有** `LICENSE` 文件，正式开源前需要补一份。
+- **第三方脚本保留上游原样**：`wan2.7-image-skill/scripts/` 的代码与版权头未改动，只把配套说明文档翻成中文。
 
-| Template | Best For | Lead Character |
-|---|---|---|
-| 🧩 Puzzle / Mission | Math, Logic | Optimus Prime |
-| 🌍 Adventure / Discovery | Science, Nature | Bumblebee |
-| 🚑 Rescue Action | Safety, Health | Ratchet / PAW Patrol |
-| ⏰ Time Travel | History, Culture | Super Wings / Optimus |
+## 仓库结构
 
-## 🔧 API Reference
+| 路径 | 干什么用 |
+|---|---|
+| `SKILL.md` | Skill 主定义：工作流程、角色库、知识分类、三种用法、常见问题 |
+| `QUICKSTART.md` | 5 条可直接复制的组图命令，附改知识点 / 角色 / 数量的技巧 |
+| `FULL-EXAMPLE.md` | 一份 5 幕「重力」完整剧本，含提示词、知识卡片、家长指南 |
+| `references/` | 4 份参考：角色语气、画面提示词、需求收集、故事模板 |
+| `scripts/generate_story_images.py` | 检查环境并调用 Wan2.7 的桥接脚本 |
+| `wan2.7-image-skill/` | 随仓库附带的出图脚本与说明文档（第三方代码） |
+| `images/` | 本页 4 张中文示意图 |
+| `README_CN.md` | 历史中文版入口，现已合并到本文件 |
 
-The image generation script accepts these arguments:
+## 常见问题
 
-```bash
-python scripts/generate_story_images.py
-```
+| 现象 | 按顺序检查 |
+|---|---|
+| 提示没设置 `DASHSCOPE_API_KEY` | 先设环境变量；桥接脚本只警告不拦，真正调用会失败 |
+| 任务一直是 `RUNNING` | 用 `check_wan_task_status.py` 查 `task_id`；SKILL.md 建议每 10 秒查一次、最多 3 次 |
+| 组图里角色长得不一样 | 确认加了 `--enable_sequential`，且每条提示词都重复写了角色造型 |
+| 想改角色说话的味儿 | 改 `references/character-voices.md`，别只改故事正文 |
+| 提示词里画面太吓人 | 模板要求「儿童友好、无恐怖元素、无战斗场景」，检查是否被改写掉 |
+| 旧链接指向 `README_CN.md` | 那份已合并到本文件，内容以这里为准 |
+| 找不到 `LICENSE` | 仓库确实没有，见 [已知边界](#已知边界) |
 
-| Parameter | Description | Default |
-|---|---|---|
-| `--user_requirement` | Story prompt text | (interactive) |
-| `--n` | Number of images: 3, 5, or 8 | 5 |
-| `--size` | Resolution: `1K` or `2K` | 2K |
-| `--enable_sequential` | Coherent multi-image mode | `true` |
+## 想继续改
 
-## 🤝 Contributing
+从 [SKILL.md](SKILL.md) 的工作流程开始；加角色改 `references/character-voices.md` 和 `image-prompts.md`，
+加故事模板改 `references/story-templates.md`。飞书介绍文档里的三份成品可以直接拿来当提示词样例。
 
-Contributions are welcome! Here's how:
-
-1. **Add a character** — Create a new entry in `references/character-voices.md` and `references/image-prompts.md`
-2. **Add a story template** — Add to `references/story-templates.md`
-3. **Improve prompts** — Enhance image generation quality in `references/image-prompts.md`
-4. **Report issues** — Open an issue with the `bug` label
-
-## 📄 License
-
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
-
-## 📖 Usage Guide
-
-For a detailed walkthrough with screenshots and examples, see the [Usage Guide (使用说明)](https://vcnqyg6spyqg.feishu.cn/docx/DvxgdZFOhoVVEWxAU1scxA0cnze).
-
-## 🙏 Acknowledgments
-
-- [Wan2.7 Image Skill](https://github.com/anthropics/wan2.7-image-skill) — AI image generation backbone
-- [DashScope API](https://dashscope.aliyun.com/) — Image generation service
-- Inspired by every parent who turned bedtime into story time ❤️
-
----
-
-<div align="center">
-<sub>Made with ❤️ for curious little minds</sub>
-</div>
+> 个人整理项目，动画角色形象归各自版权方所有；生成图片前请确认你使用的模型和素材符合相应条款。

@@ -4,26 +4,26 @@
 # Copyright 2025-2026 The Alibaba Wan Team Authors. All rights reserved.
 
 """
-File Upload to OSS - File Upload Utility
+上传文件到对象存储 —— 文件上传工具
 
-Upload local files or base64-encoded image data to the temporary OSS storage and obtain an oss:// URL.
+把本地文件或 base64 图片数据上传到临时对象存储，换取一个 oss:// 地址。
 
-Use Cases:
-- Uploading reference images for image-to-image generation, image editing, or image series generation
-- Any scenario requiring local files or base64-encoded data as model input
+适用场景：
+- 为图生图、图像编辑或组图生成上传参考图
+- 任何需要把本地文件、base64 数据作为模型输入的场景
 
-Usage:
-    # Method 1: Upload from a file path
+用法：
+    # 方式一：按文件路径上传
     python file_to_oss.py --file /path/to/image.jpg --model wan2.7-image
     
-    # Method 2: Upload from base64 data
+    # 方式二：上传 base64 数据
     python file_to_oss.py --base64 "<base64_data>" --model wan2.7-image
 
-Example Output:
+输出示例：
     oss://dashscope-instant/xxx/2024-07-18/xxx/cat.png
 
-Environment Variable:
-    DASHSCOPE_API_KEY: Required - your Alibaba Cloud DashScope API Key
+环境变量：
+    DASHSCOPE_API_KEY：必填，阿里云百炼的 API 密钥
 """
 
 import os
@@ -37,33 +37,33 @@ import argparse
 def upload_file_to_oss(api_key: str, model_name: str, file_path: str = None, 
                        base64_data: str = None, filename: str = None) -> str:
     """
-    Upload a file to temporary OSS storage
+    把文件上传到临时对象存储
     
-    Args:
-        api_key: Alibaba Cloud DashScope API Key
-        model_name: Model name (e.g., wan2.7-image)
-        file_path: Local file path (mutually exclusive with base64_data)
-        base64_data: Base64-encoded image data (mutually exclusive with file_path)
-        filename: Filename to use when uploading via base64_data (default: image.png)
+    参数：
+        api_key：阿里云百炼的 API 密钥
+        model_name：模型名称，例如 wan2.7-image
+        file_path：本地文件路径，与 base64_data 二选一
+        base64_data：base64 编码的图片数据，与 file_path 二选一
+        filename：用 base64_data 上传时指定的文件名，默认 image.png
         
-    Returns:
-        A temporary URL in oss:// format
+    返回值：
+        oss:// 格式的临时地址
         
-    Raises:
-        ValueError: If neither file_path nor base64_data is provided
-        FileNotFoundError: If the specified file does not exist
-        Exception: If the upload fails
+    可能抛出的异常：
+        ValueError：file_path 与 base64_data 都没给
+        FileNotFoundError：指定文件不存在
+        Exception：上传失败
     """
     
     if not file_path and not base64_data:
-        raise ValueError("Either file_path or base64_data must be provided")
+        raise ValueError("必须提供 file_path 或 base64_data")
     if file_path and base64_data:
-        raise ValueError("Only one of file_path or base64_data may be provided")
+        raise ValueError("file_path 与 base64_data 只能提供一个")
     
 
     if file_path:
         if not os.path.exists(file_path):
-            raise FileNotFoundError(f"File not found: {file_path}")
+            raise FileNotFoundError(f"文件不存在：{file_path}")
         with open(file_path, 'rb') as f:
             file_content = f.read()
         file_name = Path(file_path).name
@@ -73,7 +73,7 @@ def upload_file_to_oss(api_key: str, model_name: str, file_path: str = None,
                 base64_data = base64_data.split(',', 1)[1]
             file_content = base64.b64decode(base64_data)
         except Exception as e:
-            raise Exception(f"Base64 decoding failed: {e}")
+            raise Exception(f"base64 解码失败：{e}")
         file_name = filename or "image.png"
 
 
@@ -90,11 +90,11 @@ def upload_file_to_oss(api_key: str, model_name: str, file_path: str = None,
     try:
         response = requests.get(upload_url, headers=headers, params=params)
         if response.status_code != 200:
-            raise ValueError(f"Failed to get upload policy: {response.text}")
+            raise ValueError(f"获取上传凭证失败：{response.text}")
         
         policy_data = response.json()['data']
     except Exception as e:
-        raise Exception(f"Failed to obtain upload credentials: {e}")
+        raise Exception(f"获取上传凭证失败：{e}")
     
     
     key = f"{policy_data['upload_dir']}/{file_name}"
@@ -113,47 +113,47 @@ def upload_file_to_oss(api_key: str, model_name: str, file_path: str = None,
     try:
         response = requests.post(policy_data['upload_host'], files=files)
         if response.status_code != 200:
-            raise Exception(f"Upload failed: {response.text}")
+            raise Exception(f"上传失败：{response.text}")
     except Exception as e:
-        raise Exception(f"File upload failed: {e}")
+        raise Exception(f"文件上传失败：{e}")
     
     return f"oss://{key}"
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='OSS File Upload Utility',
+        description='上传文件到对象存储的工具',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
-Example:
-  # Method 1: Upload from a file path
+示例：
+  # 方式一：按文件路径上传
   python file_to_oss.py --file /path/to/image.jpg --model wan2.7-image
   
-  # Method 2: Upload from base64 data
+  # 方式二：上传 base64 数据
   python file_to_oss.py --base64 "<base64_data>" --model wan2.7-image
         """
     )
     
-    parser.add_argument('--file', '-f', help='Local file path (mutually exclusive with base64_data)')
-    parser.add_argument('--base64', '-b', help='Base64-encoded image data (mutually exclusive with file_path)')
-    parser.add_argument('--model', '-m', required=True, help='Model name (e.g., wan2.7-image)')
-    parser.add_argument('--filename', help='Filename to use when uploading via base64_data (default: image.png)')
+    parser.add_argument('--file', '-f', help='本地文件路径，与 base64_data 二选一')
+    parser.add_argument('--base64', '-b', help='base64 编码的图片数据，与 file_path 二选一')
+    parser.add_argument('--model', '-m', required=True, help='模型名称，例如 wan2.7-image')
+    parser.add_argument('--filename', help='用 base64_data 上传时指定的文件名，默认 image.png')
     
     args = parser.parse_args()
 
 
     if not args.file and not args.base64:
-        print("❌ Error: Please provide one of --file, --base64")
-        print("   Use --help to view help information.")
+        print("❌ 错误：请提供 --file 或 --base64 之一")
+        print("   用 --help 查看帮助信息。")
         sys.exit(1)
     
     api_key = os.getenv("DASHSCOPE_API_KEY")
     if not api_key:
-        print("❌ Error: DASHSCOPE_API_KEY is not set")
-        print("Please set the environment variable: ")
-        print("If using bash")
+        print("❌ 错误：未设置 DASHSCOPE_API_KEY")
+        print("请先设置环境变量：")
+        print("使用 bash 时：")
         print("echo 'export DASHSCOPE_API_KEY=\"your-api-key-here\"' >> ~/.bashrc && source ~/.bashrc")
-        print("If using zsh")
+        print("使用 zsh 时：")
         print("echo 'export DASHSCOPE_API_KEY=\"your-api-key-here\"' >> ~/.zshrc && source ~/.zshrc")
         sys.exit(1)
     
@@ -166,7 +166,7 @@ Example:
         
         print(oss_url)
     except Exception as e:
-        print(f"❌ Failed: {e}")
+        print(f"❌ 失败：{e}")
         sys.exit(1)
 
 

@@ -56,20 +56,20 @@ graph TB
 
 ## 🚀 快速开始
 
-### Step 1: 环境配置
+### 第 1 步：环境配置
 `wan2.7-image-skill` 已集成在项目根目录下，无需额外安装。
 ```bash
 # 确认文件存在
 ls ./wan2.7-image-skill/
 ```
 
-### Step 2: 配置 API Key
+### 第 2 步：配置 API 密钥
 确保已设置环境变量：
 ```bash
 export DASHSCOPE_API_KEY="your-api-key-here"
 ```
 
-### Step 3: 触发使用
+### 第 3 步：触发使用
 直接说：
 - "用变形金刚给我家5岁孩子讲什么是重力"
 - "奥特曼教你认识太阳系"
@@ -223,7 +223,7 @@ Skill：
 
 ## 🔧 Wan2.7 调用实战指南
 
-### 方式一：单张图片生成（Mode 1）
+### 方式一：单张图片生成
 
 **适用场景**：生成单个角色形象、测试提示词
 
@@ -239,7 +239,7 @@ python3 scripts/image-generation-editing.py \
 
 ---
 
-### 方式二：组图生成（Mode 3 - 推荐！）✨
+### 方式二：组图生成（推荐）✨
 
 **适用场景**：生成完整故事的 3-8 张连贯图片
 
@@ -301,7 +301,7 @@ python3 scripts/image-generation-editing.py \
 
 ## 🎬 完整实战流程演示
 
-### Step 1: 需求收集
+### 第 1 步：需求收集
 ```
 用户：用变形金刚给7岁孩子讲什么是浮力
 
@@ -309,10 +309,10 @@ Skill：好的！让我先确认几个问题...
 （收集：年龄7岁、知识类型科学、角色变形金刚、5张画面、要互动问题）
 ```
 
-### Step 2: 故事创作
+### 第 2 步：故事创作
 创作完整的5幕故事剧本（参考 [FULL-EXAMPLE.md](FULL-EXAMPLE.md)）
 
-### Step 3: 调用 Wan2.7 生成组图
+### 第 3 步：调用 Wan2.7 生成组图
 ```bash
 cd ./wan2.7-image-skill
 
@@ -329,12 +329,12 @@ python3 scripts/image-generation-editing.py \
     --enable_sequential
 ```
 
-### Step 4: 获取结果
+### 第 4 步：获取结果
 - 等待生成完成（通常 30-60 秒）
 - 获取返回的图片 URL 列表
 - 展示给用户
 
-### Step 5: 展示完整作品
+### 第 5 步：展示完整作品
 - 把图片按顺序排列
 - 配上故事对话
 - 添加知识卡片和家长指南
@@ -387,7 +387,7 @@ python3 scripts/check_wan_task_status.py "<task_id>"
 - [故事创作模板库](references/story-templates.md)
 - [画面提示词库](references/image-prompts.md)
 - [角色对话风格指南](references/character-voices.md)
-- [教育心理学参考](references/education-theory.md)
+- [快速参考卡](QUICKSTART.md)
 
 ---
 

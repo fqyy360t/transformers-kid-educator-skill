@@ -4,7 +4,7 @@
 # Copyright 2025-2026 The Alibaba Wan Team Authors. All rights reserved.
 
 """
-image-generation-editing - Use the DashScope API for image generation, image editing, and image series generation.
+image-generation-editing —— 调用百炼接口完成文生图、图像编辑与组图生成。
 """
 
 import os
@@ -15,7 +15,7 @@ import time
 
 
 def _poll_wan_task_status(task_id: str, headers: dict[str, str]) -> str:
-    """Poll task status until completion"""
+    """轮询任务状态，直到任务结束"""
 
     dashscope_base_url = os.environ.get("DASHSCOPE_BASE_URL", "https://dashscope.aliyuncs.com/api/v1/")
     check_url = f"{dashscope_base_url}tasks/{task_id}"
@@ -26,8 +26,8 @@ def _poll_wan_task_status(task_id: str, headers: dict[str, str]) -> str:
         if check_count >= 15:
             return {"status": status, "content": []}
         print(
-            f"Polling Dashscope generation {task_id}, current status: {status} ...")
-        time.sleep(3)  # Wait 3 seconds between polls
+            f"正在查询百炼任务 {task_id}，当前状态：{status} ……")
+        time.sleep(3)  # 每次查询间隔 3 秒
         poll_response = requests.get(check_url, headers=headers)
         if poll_response.status_code != 200:
             try:
@@ -37,7 +37,7 @@ def _poll_wan_task_status(task_id: str, headers: dict[str, str]) -> str:
             except Exception:
                 error_message = f"HTTP {poll_response.status_code}"
             raise Exception(
-                f"poll Dashscope failed: {error_message}")
+                f"查询百炼任务失败：{error_message}")
         
         poll_res = poll_response.json()
         status = poll_res.get("output", {}).get("task_status")
@@ -47,30 +47,30 @@ def _poll_wan_task_status(task_id: str, headers: dict[str, str]) -> str:
                 return {"status": status, "content": output}
             else:
                 raise Exception(
-                    "No image URL found in successful response")
+                    "成功响应中未找到图片地址")
         elif status == "FAILED":
             failed_code = poll_res.get("output", {}).get("code", "")
             failed_message = poll_res.get("output", {}).get("message", "")
-            detail_error = f"Task failed with code: {failed_code}  message: {failed_message}"
+            detail_error = f"任务失败，错误码：{failed_code}，说明：{failed_message}"
             raise Exception(
-                f"Dashscope image generation failed: {detail_error}")
+                f"百炼图片生成失败：{detail_error}")
         check_count += 1
-    raise Exception(f"Task polling failed with final status: {status}")
+    raise Exception(f"任务查询结束，最终状态：{status}")
     
 
 def generate(user_requirement: str, input_images: list[str] = [], n: int = 1, size: str = '1K', enable_sequential: bool = False):
     """
-    Use the DashScope API for image generation, image editing, and image series generation
+    调用百炼接口完成文生图、图像编辑与组图生成
 
-    Args:
-        user_requirement: User's requirements for image generation, image editing, and image series generation
-        input_images: Input reference image
-        n: Number of images to generate
-        size: Resolution of the generated image
-        enable_sequential: Whether to enable image series generation
+    参数：
+        user_requirement：用户对文生图、图像编辑或组图生成的需求描述
+        input_images：输入的参考图
+        n：生成图片数量
+        size：生成图片的分辨率
+        enable_sequential：是否启用组图生成
         
-    Returns:
-        dict: A result dictionary containing fields such as "success" and "content"
+    返回值：
+        dict：包含 success、content 等字段的结果字典
     """
 
     try:
@@ -78,7 +78,7 @@ def generate(user_requirement: str, input_images: list[str] = [], n: int = 1, si
         if not api_key:
             return {
                 "success": False,
-                "error": "API key not provided. Set DASHSCOPE_API_KEY environment variable"
+                "error": "未提供 API 密钥，请设置 DASHSCOPE_API_KEY 环境变量"
             }
 
         dashscope_base_url = os.environ.get("DASHSCOPE_BASE_URL", "https://dashscope.aliyuncs.com/api/v1/")
@@ -113,7 +113,7 @@ def generate(user_requirement: str, input_images: list[str] = [], n: int = 1, si
                 payload['input']['messages'][0]['content'].append({"image": f"{img_url}"})
         response = requests.post(api_url, headers=headers, json=payload)
 
-        # post request
+        # 发起生成请求
         if response.status_code != 200:
             try:
                 error_data = response.json()
@@ -122,12 +122,12 @@ def generate(user_requirement: str, input_images: list[str] = [], n: int = 1, si
             except Exception:
                 error_message = f"HTTP {response.status_code}"
             raise Exception(
-                f"Dashscope task creation failed: {error_message}")
+                f"创建百炼任务失败：{error_message}")
         result = response.json()
         task_id = result.get("output", {}).get("task_id", None)
-        print('Dashscope TASK_ID: ', task_id)
+        print('任务编号（task_id）：', task_id)
 
-        # check results
+        # 查询生成结果
         check_headers = {
             "Content-Type": "application/json",
             "Authorization": f"Bearer {api_key}"
@@ -139,7 +139,7 @@ def generate(user_requirement: str, input_images: list[str] = [], n: int = 1, si
             for rst_idx, rst_item in enumerate(content):
                 rst_type = rst_item.get('type', '')
                 if rst_type == 'image':
-                    print(f'result No. {rst_idx+1}: ', rst_item['image'])
+                    print(f'第 {rst_idx+1} 张：', rst_item['image'])
 
             return {
                 "success": True,
@@ -155,7 +155,7 @@ def generate(user_requirement: str, input_images: list[str] = [], n: int = 1, si
             }
 
     except Exception as e:
-        print(f"❌ Generation failed: {e}")
+        print(f"❌ 生成失败：{e}")
         return {
             "success": False,
             "error": f"Generation failed: {e}"
@@ -163,25 +163,25 @@ def generate(user_requirement: str, input_images: list[str] = [], n: int = 1, si
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Use the DashScope API for image generation, image editing, and image series generation")
+    parser = argparse.ArgumentParser(description="调用百炼接口完成文生图、图像编辑与组图生成")
 
-    parser.add_argument("--user_requirement", type=str, required=True, help="User's requirements for image generation, image editing, and image series generation")
+    parser.add_argument("--user_requirement", type=str, required=True, help="用户对文生图、图像编辑或组图生成的需求描述")
 
-    parser.add_argument("--input_images", nargs='*', default=[], help="Input reference image")
-    parser.add_argument("--n", type=int, default=1, help="Number of images to generate")
-    parser.add_argument("--size", type=str, default='1K', help="Resolution of the generated image")
-    parser.add_argument("--enable_sequential", action="store_true", help="Whether to enable image series generation")
+    parser.add_argument("--input_images", nargs='*', default=[], help="输入的参考图")
+    parser.add_argument("--n", type=int, default=1, help="生成图片数量")
+    parser.add_argument("--size", type=str, default='1K', help="生成图片的分辨率")
+    parser.add_argument("--enable_sequential", action="store_true", help="是否启用组图生成")
     
     args = parser.parse_args()
     
 
     api_key = os.environ.get("DASHSCOPE_API_KEY")
     if not api_key:
-        print("❌ Error: DASHSCOPE_API_KEY is not set")
-        print("Please set the environment variable: ")
-        print("If using bash")
+        print("❌ 错误：未设置 DASHSCOPE_API_KEY")
+        print("请先设置环境变量：")
+        print("使用 bash 时：")
         print("echo 'export DASHSCOPE_API_KEY=\"your-api-key-here\"' >> ~/.bashrc && source ~/.bashrc")
-        print("If using zsh")
+        print("使用 zsh 时：")
         print("echo 'export DASHSCOPE_API_KEY=\"your-api-key-here\"' >> ~/.zshrc && source ~/.zshrc")
         sys.exit(1)
     
@@ -198,19 +198,19 @@ def main():
         )
         
         if result["success"]:
-            print("\n🎉 Generation successful!")
+            print("\n🎉 生成成功！")
         else:
             if result['error'] == 'still running':
-                print(f"\nStill running! This is an asynchronous generation task. You can later query its status using task_id: {result['task_id']}")
+                print(f"\n仍在进行中：这是异步生成任务，稍后可用任务编号 {result['task_id']} 再查一次。")
             else:
-                print(f"\n❌ Generation failed: {result['error']}")
+                print(f"\n❌ 生成失败：{result['error']}")
                 sys.exit(1)
             
     except KeyboardInterrupt:
-        print("\n\n⚠️  User interrupted the operation")
+        print("\n\n⚠️  用户中断了操作")
         sys.exit(0)
     except Exception as e:
-        print(f"\n❌ Program execution failed: {e}")
+        print(f"\n❌ 程序执行失败：{e}")
         sys.exit(1)
 
 

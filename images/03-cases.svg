@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-label="飞书文档里的三个成品案例">
+  <rect width="1200" height="440" fill="#ffffff"/>
+  <text x="48" y="46" font-family="sans-serif" font-size="25" font-weight="700" fill="#111827">飞书文档里的三个成品案例</text>
+  <text x="48" y="76" font-family="sans-serif" font-size="14" fill="#6b7280">三份都面向 7 岁孩子，都带互动问题，故事与插图已经生成好，可直接点开看全文。</text>
+
+  <g font-family="sans-serif">
+    <rect x="48" y="104" width="352" height="230" rx="12" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <text x="68" y="136" font-size="14" font-weight="700" fill="#065f46">案例一 · 万有引力</text>
+    <text x="68" y="164" font-size="13" font-weight="700" fill="#111827">汪汪队阿奇探案</text>
+    <text x="68" y="192" font-size="12.5" fill="#374151">角色：阿奇（汪汪队）</text>
+    <text x="68" y="214" font-size="12.5" fill="#374151">知识点：苹果为什么会落地</text>
+    <text x="68" y="236" font-size="12.5" fill="#374151">篇幅：中篇，5 幕</text>
+    <text x="68" y="258" font-size="12.5" fill="#374151">插图：5 张连贯组图</text>
+    <text x="68" y="292" font-size="11.5" fill="#6b7280">从农场苹果树下发现线索，</text>
+    <text x="68" y="312" font-size="11.5" fill="#6b7280">到用苹果、羽毛、小球做实验。</text>
+
+    <rect x="424" y="104" width="352" height="230" rx="12" fill="#fef2f2" stroke="#fecaca"/>
+    <text x="444" y="136" font-size="14" font-weight="700" fill="#991b1b">案例二 · 年的故事</text>
+    <text x="444" y="164" font-size="13" font-weight="700" fill="#111827">天天飞上天看新年</text>
+    <text x="444" y="192" font-size="12.5" fill="#374151">角色：天天（汪汪队）</text>
+    <text x="444" y="214" font-size="12.5" fill="#374151">知识点：年俗与传统文化</text>
+    <text x="444" y="236" font-size="12.5" fill="#374151">篇幅：长篇，8 幕</text>
+    <text x="444" y="258" font-size="12.5" fill="#374151">插图：8 张连贯组图</text>
+    <text x="444" y="292" font-size="11.5" fill="#6b7280">总部挂起红灯笼，天天飞到</text>
+    <text x="444" y="312" font-size="11.5" fill="#6b7280">农家小院，听老奶奶讲年俗。</text>
+
+    <rect x="800" y="104" width="352" height="230" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="820" y="136" font-size="14" font-weight="700" fill="#1e3a8a">案例三 · 水的三种形态</text>
+    <text x="820" y="164" font-size="13" font-weight="700" fill="#111827">流沙河悟净学知识</text>
+    <text x="820" y="192" font-size="12.5" fill="#374151">角色：沙和尚（西游记）</text>
+    <text x="820" y="214" font-size="12.5" fill="#374151">知识点：固态、液态、气态</text>
+    <text x="820" y="236" font-size="12.5" fill="#374151">篇幅：长篇，8 幕</text>
+    <text x="820" y="258" font-size="12.5" fill="#374151">插图：8 张连贯组图</text>
+    <text x="820" y="292" font-size="11.5" fill="#6b7280">师徒四人在流沙河休息，</text>
+    <text x="820" y="312" font-size="11.5" fill="#6b7280">从河水讲到冰与水汽。</text>
+  </g>
+
+  <rect x="48" y="354" width="1104" height="64" rx="10" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="72" y="380" font-family="sans-serif" font-size="12.5" fill="#374151">来源：飞书《介绍与功能展示》文档的「功能展示」章节，三份成品各自有独立文档，链接见下方表格。</text>
+  <text x="72" y="402" font-family="sans-serif" font-size="11.5" fill="#6b7280">这些是文档里展示的成品，不是本仓库自动跑出的结果；仓库内不附生成图片。</text>
+</svg>

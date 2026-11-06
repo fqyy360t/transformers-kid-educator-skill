@@ -4,7 +4,7 @@
 # Copyright 2025-2026 The Alibaba Wan Team Authors. All rights reserved.
 
 """
-check_wan_task_status -  Query the status and final result of a DashScope API asynchronous task using the task_id.
+check_wan_task_status —— 按任务编号查询异步生成任务的状态与最终结果。
 """
 
 import os
@@ -14,7 +14,7 @@ import requests
 
 
 def _check_wan_task_status(task_id: str, headers: dict[str, str]) -> str:
-    """Check task status until completion"""
+    """查询任务状态，直到任务结束"""
 
     dashscope_base_url = os.environ.get("DASHSCOPE_BASE_URL", "https://dashscope.aliyuncs.com/api/v1/")
     check_url = f"{dashscope_base_url}tasks/{task_id}"
@@ -28,7 +28,7 @@ def _check_wan_task_status(task_id: str, headers: dict[str, str]) -> str:
         except Exception:
             error_message = f"HTTP {check_response.status_code}"
         raise Exception(
-            f"poll Dashscope failed: {error_message}")
+            f"查询百炼任务失败：{error_message}")
     
     check_res = check_response.json()
     status = check_res.get("output", {}).get("task_status")
@@ -38,30 +38,30 @@ def _check_wan_task_status(task_id: str, headers: dict[str, str]) -> str:
             return {"status": status, "content": output}
         else:
             raise Exception(
-                "No image URL found in successful response")
+                "成功响应中未找到图片地址")
     elif status == "RUNNING":
         return {"status": status, "content": []}
     elif status == "FAILED":
         failed_code = check_res.get("output", {}).get("code", "")
         failed_message = check_res.get("output", {}).get("message", "")
-        detail_error = f"Task failed with code: {failed_code}  message: {failed_message}"
+        detail_error = f"任务失败，错误码：{failed_code}，说明：{failed_message}"
         raise Exception(
-            f"Dashscope image generation failed: {detail_error}")
-    raise Exception(f"Task polling failed with final status: {status}")
+            f"百炼图片生成失败：{detail_error}")
+    raise Exception(f"任务查询结束，最终状态：{status}")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Query the status and final result of a DashScope API asynchronous task using the task_id")
-    parser.add_argument("--task_id", type=str, required=True, help="The task_id used for querying")
+    parser = argparse.ArgumentParser(description="按任务编号查询异步生成任务的状态与最终结果")
+    parser.add_argument("--task_id", type=str, required=True, help="要查询的任务编号")
     args = parser.parse_args()
     
     api_key = os.environ.get("DASHSCOPE_API_KEY")
     if not api_key:
-        print("❌ Error: DASHSCOPE_API_KEY is not set")
-        print("Please set the environment variable: ")
-        print("If using bash")
+        print("❌ 错误：未设置 DASHSCOPE_API_KEY")
+        print("请先设置环境变量：")
+        print("使用 bash 时：")
         print("echo 'export DASHSCOPE_API_KEY=\"your-api-key-here\"' >> ~/.bashrc && source ~/.bashrc")
-        print("If using zsh")
+        print("使用 zsh 时：")
         print("echo 'export DASHSCOPE_API_KEY=\"your-api-key-here\"' >> ~/.zshrc && source ~/.zshrc")
         sys.exit(1)
     
@@ -79,17 +79,17 @@ def main():
             for rst_idx, rst_item in enumerate(content):
                 rst_type = rst_item.get('type', '')
                 if rst_type == 'image':
-                    print(f'result No. {rst_idx+1}', rst_item['image'])
-            print("\n🎉 Generation successful!")
+                    print(f'第 {rst_idx+1} 张：', rst_item['image'])
+            print("\n🎉 生成成功！")
         elif status == "RUNNING":
-            print(f"\nStill running! This is an asynchronous generation task. You can later query its status using task_id: {args.task_id}.")
+            print(f"\n仍在进行中：这是异步生成任务，稍后可用任务编号 {args.task_id} 再查一次。")
         
             
     except KeyboardInterrupt:
-        print("\n\n⚠️  User interrupted the operation")
+        print("\n\n⚠️  用户中断了操作")
         sys.exit(0)
     except Exception as e:
-        print(f"\n❌ Program execution failed: {e}")
+        print(f"\n❌ 程序执行失败：{e}")
         sys.exit(1)
 
 

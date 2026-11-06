@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 470" width="1200" height="470" role="img" aria-label="一句话变成一本带图儿童故事的五个步骤">
+  <rect width="1200" height="470" fill="#ffffff"/>
+  <text x="48" y="46" font-family="sans-serif" font-size="25" font-weight="700" fill="#111827">一句话，变成一本带图的儿童故事</text>
+  <text x="48" y="76" font-family="sans-serif" font-size="14" fill="#6b7280">你只说清「孩子几岁、讲什么、喜欢谁」，其余的编故事、写画面提示词、调用出图交给 Skill。</text>
+
+  <g font-family="sans-serif">
+    <rect x="48" y="112" width="208" height="210" rx="12" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="68" y="146" font-size="14" font-weight="700" fill="#1e3a8a">① 你说一句话</text>
+    <text x="68" y="180" font-size="12.5" fill="#1e40af">「用汪汪队给我 7 岁</text>
+    <text x="68" y="202" font-size="12.5" fill="#1e40af">孩子讲万有引力」</text>
+    <text x="68" y="240" font-size="12" fill="#6b7280">可以换角色、换知识点、</text>
+    <text x="68" y="260" font-size="12" fill="#6b7280">换故事长度</text>
+    <text x="68" y="300" font-size="11.5" fill="#9ca3af">入口：对 AI 助手直接说</text>
+
+    <rect x="274" y="112" width="208" height="210" rx="12" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <text x="294" y="146" font-size="14" font-weight="700" fill="#065f46">② 问清三件事</text>
+    <text x="294" y="180" font-size="12.5" fill="#047857">年龄：4–6 / 7–9 / 10–12</text>
+    <text x="294" y="202" font-size="12.5" fill="#047857">知识类型与角色偏好</text>
+    <text x="294" y="240" font-size="12" fill="#6b7280">信息不全时按默认档</text>
+    <text x="294" y="260" font-size="12" fill="#6b7280">继续，不反复追问</text>
+    <text x="294" y="300" font-size="11.5" fill="#9ca3af">依据：requirements-gathering.md</text>
+
+    <rect x="500" y="112" width="208" height="210" rx="12" fill="#fefce8" stroke="#fde68a"/>
+    <text x="520" y="146" font-size="14" font-weight="700" fill="#854d0e">③ 编三幕故事</text>
+    <text x="520" y="180" font-size="12.5" fill="#a16207">发现问题 → 探索知识</text>
+    <text x="520" y="202" font-size="12.5" fill="#a16207">→ 应用解决</text>
+    <text x="520" y="240" font-size="12" fill="#6b7280">角色对话 + 互动提问</text>
+    <text x="520" y="260" font-size="12" fill="#6b7280">+ 结尾知识卡片</text>
+    <text x="520" y="300" font-size="11.5" fill="#9ca3af">依据：story-templates.md</text>
+
+    <rect x="726" y="112" width="208" height="210" rx="12" fill="#fdf4ff" stroke="#f0abfc"/>
+    <text x="746" y="146" font-size="14" font-weight="700" fill="#86198f">④ 生成连贯插图</text>
+    <text x="746" y="180" font-size="12.5" fill="#a21caf">每幕一条画面提示词</text>
+    <text x="746" y="202" font-size="12.5" fill="#a21caf">调用 Wan2.7 组图模式</text>
+    <text x="746" y="240" font-size="12" fill="#6b7280">可选 3 / 5 / 8 张</text>
+    <text x="746" y="260" font-size="12" fill="#6b7280">1K 或 2K 分辨率</text>
+    <text x="746" y="300" font-size="11.5" fill="#9ca3af">依据：image-prompts.md</text>
+
+    <rect x="952" y="112" width="200" height="210" rx="12" fill="#fff7ed" stroke="#fed7aa"/>
+    <text x="972" y="146" font-size="14" font-weight="700" fill="#9a3412">⑤ 得到成品</text>
+    <text x="972" y="180" font-size="12.5" fill="#c2410c">完整故事 + 一组插图</text>
+    <text x="972" y="202" font-size="12.5" fill="#c2410c">+ 家长讨论题</text>
+    <text x="972" y="240" font-size="12" fill="#6b7280">换个知识点就是</text>
+    <text x="972" y="260" font-size="12" fill="#6b7280">一本新绘本</text>
+    <text x="972" y="300" font-size="11.5" fill="#9ca3af">示例：FULL-EXAMPLE.md</text>
+  </g>
+
+  <g font-family="sans-serif" font-size="20" fill="#9ca3af" font-weight="700">
+    <text x="258" y="222">→</text>
+    <text x="484" y="222">→</text>
+    <text x="710" y="222">→</text>
+    <text x="936" y="222">→</text>
+  </g>
+
+  <rect x="48" y="346" width="1104" height="96" rx="10" fill="#f9fafb" stroke="#e5e7eb"/>
+  <text x="72" y="374" font-family="sans-serif" font-size="13" font-weight="700" fill="#111827">要跑起来只需要两样东西</text>
+  <text x="72" y="400" font-family="sans-serif" font-size="12.5" fill="#374151">① Python 3.9 以上；② 环境变量 DASHSCOPE_API_KEY（阿里云百炼的密钥）。Wan2.7 出图脚本已随仓库附带，不用另装。</text>
+  <text x="72" y="424" font-family="sans-serif" font-size="11.5" fill="#6b7280">出图会调用云端接口并计费；仓库本身不含任何生成好的图片，成品案例放在飞书文档里。</text>
+</svg>

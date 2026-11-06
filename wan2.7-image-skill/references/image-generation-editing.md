@@ -1,12 +1,12 @@
-# Wan 2.7 Image Generation & Editing（图像生成与编辑）
+# Wan 2.7 图像生成与编辑
 
-## Overview
+## 概述
 
 wan2.7-image，支持**文生图**、**文生组图**、**图生组图**、**图像编辑**和**多图参考生成**。
 
-**Model:**  `wan2.7-image` （固定） 
+**模型：** `wan2.7-image`（固定）
 
-### Core Features
+### 核心能力
 
 - **图像生成**：文生图、文生组图
 - **图像编辑**：基于参考图的编辑、风格迁移、多图融合
@@ -14,9 +14,9 @@ wan2.7-image，支持**文生图**、**文生组图**、**图生组图**、**图
 
 ---
 
-## Three Operation Modes
+## 三种操作模式
 
-### Mode 1: 图像生成（文生图）
+### 方式一：图像生成（文生图）
 
 **用途：** 纯文本生成单张图像
 
@@ -43,7 +43,7 @@ python3 scripts/image-generation-editing.py \
 
 ---
 
-### Mode 2: 图像编辑
+### 方式二：图像编辑
 
 **用途：** 基于 1-9 张参考图像进行编辑、风格迁移或主体一致性生成
 
@@ -73,19 +73,19 @@ python3 scripts/image-generation-editing.py \
 
 **参考图 本地文件上传流程：**
 ```bash
-# Step 1: 上传本地文件到 OSS（文件路径方式）
+# 第 1 步：上传本地文件到对象存储（文件路径方式）
 oss_url=$(python scripts/file_to_oss.py --file /path/to/image.jpg --model wan2.7-image)
 
-# Step 1: 上传 base64 图片到 OSS（如Claw chat框粘贴场景）
+# 第 1 步：上传 base64 图片到对象存储
 oss_url=$(python scripts/file_to_oss.py --base64 "<base64_data>" --model wan2.7-image)
 
-# Step 2: 在脚本调用中使用
+# 第 2 步：在脚本调用中使用
 # --input_images "$oss_url"
 ```
 
 ---
 
-### Mode 3: 组图生成
+### 方式三：组图生成
 
 **用途：** 根据文本描述生成系列图像（一次生成多张关联的图片，教程、故事等）可以对输入图片进行参考
 
@@ -124,19 +124,19 @@ python3 scripts/image-generation-editing.py \
 
 **参考图 本地文件上传流程：**
 ```bash
-# Step 1: 上传本地文件到 OSS（文件路径方式）
+# 第 1 步：上传本地文件到对象存储（文件路径方式）
 oss_url=$(python scripts/file_to_oss.py --file /path/to/image.jpg --model wan2.7-image)
 
-# Step 1: 上传 base64 图片到 OSS（如Claw chat框粘贴场景）
+# 第 1 步：上传 base64 图片到对象存储
 oss_url=$(python scripts/file_to_oss.py --base64 "<base64_data>" --model wan2.7-image)
 
-# Step 2: 在脚本调用中使用
+# 第 2 步：在脚本调用中使用
 # --input_images "$oss_url"
 ```
 
 ---
 
-## Image Input
+## 图像输入要求
 
 ### 支持的格式
 
@@ -147,22 +147,22 @@ oss_url=$(python scripts/file_to_oss.py --base64 "<base64_data>" --model wan2.7-
 
 ### 输入方式
 
-#### 方式 1: 公网 URL（推荐）
+#### 方式一：公网地址（推荐）
 
 直接使用已有的图片 URL：
 ```
 http://wanx.alicdn.com/material/xxx.jpeg
 ```
 
-#### 方式 2: 本地文件上传（使用脚本）
+#### 方式二：本地文件上传（使用脚本）
 
-**本地文件 → OSS URL 转换：**
+**本地文件 → 对象存储地址转换：**
 
 ```bash
-# 方式 1: 从文件路径上传
+# 方式一：从文件路径上传
 python scripts/file_to_oss.py --file <文件路径> --model <模型名称>
 
-# 方式 2: 从 base64 数据上传（OpenClaw 场景）
+# 方式二：从 base64 数据上传
 python scripts/file_to_oss.py --base64 "<base64_data>" --model <模型名称>
 
 # 示例
@@ -183,9 +183,9 @@ oss://dashscope-instant/xxx/2024-07-18/xxx/cat.png
 
 ---
 
-## Common Use Cases
+## 常见用例
 
-### Case 1: 文生图
+### 用例一：文生图
 
 ```bash
 python3 scripts/image-generation-editing.py \
@@ -194,7 +194,7 @@ python3 scripts/image-generation-editing.py \
     --size 1K
 ```
 
-### Case 2: 图像编辑（多图融合）
+### 用例二：图像编辑（多图融合）
 
 ```bash
 python3 scripts/image-generation-editing.py \
@@ -204,7 +204,7 @@ python3 scripts/image-generation-editing.py \
     --size 1K
 ```
 
-### Case 3: 组图生成（教程）
+### 用例三：组图生成（教程）
 
 ```bash
 python3 scripts/image-generation-editing.py \
@@ -216,7 +216,7 @@ python3 scripts/image-generation-editing.py \
 
 ---
 
-## Resolution Script
+## 分辨率转换脚本
 
 **脚本位置：** `scripts/parse_resolution.py`
 

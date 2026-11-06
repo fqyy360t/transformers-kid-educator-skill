@@ -5,18 +5,18 @@ metadata:
   version: 0.1.0
 ---
 
-# Wan2.7 Image Generation Skill （Wan2.7 图片生成编辑技能）
+# Wan2.7 图片生成编辑技能
 
-Generate AI images with "Wan2.7 Image" via direct API calls.
+通过直接调用接口，使用 Wan2.7 图像模型生成图片。
 
 ---
 
-## Quick Start
+## 快速开始
 
-**1. 配置环境** → [common.md](references/common.md)  
-**2. 了解能力** → 阅读下文核心能力介绍  
-**3. 选择模式** → 根据需求选择三种操作模式之一  
-**4. 详细用法** → [image-generation-editing.md](references/image-generation-editing.md)
+- **第 1 步：配置环境** → [common.md](references/common.md)
+- **第 2 步：了解能力** → 阅读下文核心能力介绍
+- **第 3 步：选择模式** → 根据需求选择三种操作模式之一
+- **第 4 步：详细用法** → [image-generation-editing.md](references/image-generation-editing.md)
 
 **核心能力：**
 - ✅ **文生图**：纯文本生成单张图像
@@ -25,7 +25,7 @@ Generate AI images with "Wan2.7 Image" via direct API calls.
 
 ---
 
-## Workflow: Unified Image Generation & Editing（统一图像生成与编辑）
+## 工作流程：统一图像生成与编辑
 
 ```mermaid
 graph TB
@@ -53,9 +53,9 @@ graph TB
 
 ---
 
-## Three Operation Modes（三种操作模式）
+## 三种操作模式
 
-### Mode 1: 图像生成（文生图）
+### 方式一：图像生成（文生图）
 
 **用途：** 纯文本生成单张图像
 
@@ -68,11 +68,11 @@ graph TB
 - `n`: 生成数量 1
 - `size`: 分辨率 (支持 1K/2K 或自定义)
 
-📖 **详细说明与用例：** [image-generation-editing.md#mode-1](references/image-generation-editing.md)
+📖 **详细说明与用例：** [图像生成与编辑·方式一](references/image-generation-editing.md#方式一图像生成文生图)
 
 ---
 
-### Mode 2: 图像编辑（图生图、风格迁移、多图融合）
+### 方式二：图像编辑（图生图、风格迁移、多图融合）
 
 **用途：** 基于参考图像进行编辑、风格迁移或保持主体一致性生成
 
@@ -85,11 +85,11 @@ graph TB
 - `n`: 生成数量 1
 - `size`: 分辨率（支持 1K/2K 或自定义）
 
-📖 **详细说明与用例：** [image-generation-editing.md#mode-2](references/image-generation-editing.md)
+📖 **详细说明与用例：** [图像生成与编辑·方式二](references/image-generation-editing.md#方式二图像编辑)
 
 ---
 
-### Mode 3: 组图生成
+### 方式三：组图生成
 
 **用途：** 根据文本描述生成系列图像（一次生成多张关联的图片，教程、故事等）
 
@@ -102,13 +102,13 @@ graph TB
 - `n`: 生成数量范围 [1-12]
 - `size`: 分辨率 （支持 1K/2K 或自定义）
 
-📖 **详细说明与用例：** [image-generation-editing.md#mode-3](references/image-generation-editing.md)
+📖 **详细说明与用例：** [图像生成与编辑·方式三](references/image-generation-editing.md#方式三组图生成)
 
 ---
 
-## Documents Structure（文档结构）
+## 文档结构
 
-### 📖 [Common Configuration](references/common.md)
+### 📖 [通用配置](references/common.md)
 
 **用途：** 通用配置和环境变量管理
 
@@ -121,20 +121,20 @@ graph TB
 
 ---
 
-### 📖 [Image Generation & Editing](references/image-generation-editing.md)
+### 📖 [图像生成与编辑](references/image-generation-editing.md)
 
 **用途：** Wan 2.7 统一技能详细文档
 
 **包含内容：**
-- 三种操作模式的详细说明和用例（Mode 1/2/3）
+- 三种操作模式的详细说明和用例（方式一 / 二 / 三）
 - 图像输入要求（格式、分辨率、大小、宽高比）
 - 分辨率转换脚本使用说明（parse_resolution.py）
 
-**何时查阅：** 需要了解具体 API 用法、参数配置或排查问题时
+**何时查阅：** 需要了解具体接口用法、参数配置或排查问题时
 
 ---
 
-### 📖 [Upload to OSS](scripts/file_to_oss.py)
+### 📖 [上传文件到对象存储](scripts/file_to_oss.py)
 
 **用途：** 本地文件或 base64 图片数据上传到临时 OSS 存储的 Python 脚本
 
@@ -148,10 +148,10 @@ graph TB
 
 **使用示例：**
 ```bash
-# 方式 1: 从文件路径上传
+# 方式一：从文件路径上传
 python scripts/file_to_oss.py --file /tmp/image.jpg --model wan2.7-image
 
-# 方式 2: 从 base64 数据上传（OpenClaw 场景）
+# 方式二：从 base64 数据上传
 python scripts/file_to_oss.py --base64 "<base64_data>" --model wan2.7-image
 
 # 输出：oss://dashscope-instant/xxx/cat.png
@@ -159,7 +159,7 @@ python scripts/file_to_oss.py --base64 "<base64_data>" --model wan2.7-image
 
 ---
 
-### 📖 [Parse resolution](scripts/parse_resolution.py)
+### 📖 [解析分辨率](scripts/parse_resolution.py)
 
 **用途：** 解析用户输入的分辨率描述，转换为 API 所需的 size 参数。
 
@@ -195,13 +195,13 @@ python scripts/check_wan_task_status.py "<task_id>"
 
 ---
 
-## Error Handling
+## 错误处理
 
 常见错误及解决方案：
 
 | 错误 | 原因 | 解决方案 |
 |------|------|----------|
-| API key not provided | 未设置 API Key | 设置 `DASHSCOPE_API_KEY` 环境变量 |
+| 未提供 API 密钥 | 未设置 API 密钥 | 设置 `DASHSCOPE_API_KEY` 环境变量 |
 | 请求失败：code=XXX | API 调用失败 | 检查网络连接、API Key 有效性、模型可用性 |
 | 解析响应失败 | 响应格式异常 | 查看原始响应，参考 DashScope 文档 |
 
@@ -209,7 +209,7 @@ python scripts/check_wan_task_status.py "<task_id>"
 
 ---
 
-## Related Documents
+## 相关文档
 
 - 📖 [common.md](references/common.md) - 环境配置的说明文档
 - 📖 [image-generation-editing.md](references/image-generation-editing.md) - 文生图/图生图/编辑/组图生成的细节和例子的说明文档

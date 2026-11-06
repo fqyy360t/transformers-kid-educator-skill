@@ -1,12 +1,12 @@
-# Common Configuration（通用配置）
+# 通用配置
 
 本文档包含所有 Skill 共享的基础配置和环境变量。
 
 ---
 
-## Quick Setup（快速配置）
+## 快速配置
 
-### Step 1: 获取 API Key
+### 第 1 步：获取 API 密钥
 
 **前提条件：** 需要阿里云账号
 
@@ -22,9 +22,9 @@
    - 进入百炼控制台 → API-KEY管理
    - 创建新的 API Key
 
-### Step 2: 配置环境变量
+### 第 2 步：配置环境变量
 
-**Region Selection（地域选择）**
+**地域选择**
 ```bash
 # 中国大陆（北京）- 默认
 export DASHSCOPE_BASE_URL="https://dashscope.aliyuncs.com/api/v1/"
@@ -35,7 +35,7 @@ export DASHSCOPE_BASE_URL="https://dashscope.aliyuncs.com/api/v1/"
 
 ---
 
-## Related Documents
+## 相关文档
 
 - 📖 [SKILL.md](../SKILL.md) - 整体工作流和技能列表
 - 📖 [image-generation-editing.md](image-generation-editing.md) - 文生图/图生图/编辑/组图生成的细节和例子的说明文档

@@ -4,34 +4,34 @@
 # Copyright 2025-2026 The Alibaba Wan Team Authors. All rights reserved.
 
 """
-Resolution Parser for Wan 2.7 Image Generation
+Wan 2.7 图片生成的分辨率解析工具
 
-Parses the user-provided resolution description and converts it into the size parameter required by the API
+把用户写的分辨率描述转换成接口所需的 size 参数。
 
-Usage Examples:
+用法示例：
     python parse_resolution.py "2K 3:4"
     python parse_resolution.py "1K 16:9"
     python parse_resolution.py "2048*2048"
     python parse_resolution.py "1K"
 
-Output:
+输出：
     1536*2048
     1696*960
     2048*2048
     1024*1024
 
-K + aspect ratio format syntax:
-`{K value} {width}:{height}`
-| input | output | description |
+K 值加宽高比的写法：
+`{K 值} {宽}:{高}`
+| 输入 | 输出 | 说明 |
 |------|------|------|
-| `1K 1:1` | 1024*1024 | 1K square |
-| `1K 3:4` | 896*1194 | Portrait orientation |
-| `1K 4:3` | 1194*896 | Landscape orientation |
-| `1K 16:9` | 1364*768 | Widescreen |
-| `1K 9:16` | 768*1364 | Mobile portrait |
-| `2K 3:4` | 1774*2364 | 2K portrait |
-| `2K 16:9` | 2730*1536 | 2K widescreen |
-| `2K 1:1` | 2048*2048 | 2K square |
+| `1K 1:1` | 1024*1024 | 1K 正方形 |
+| `1K 3:4` | 896*1194 | 竖版 |
+| `1K 4:3` | 1194*896 | 横版 |
+| `1K 16:9` | 1364*768 | 宽屏 |
+| `1K 9:16` | 768*1364 | 手机竖屏 |
+| `2K 3:4` | 1774*2364 | 2K 竖版 |
+| `2K 16:9` | 2730*1536 | 2K 宽屏 |
+| `2K 1:1` | 2048*2048 | 2K 正方形 |
 """
 
 import re
@@ -41,25 +41,25 @@ import argparse
 
 def parse_resolution(input_str):
     """
-    Parse resolution input string
+    解析用户输入的分辨率描述
     
-    Args:
-        input_str: User input supports the following formats:
-            - "2K 3:4", "1K 16:9" (K + aspect ratio)
-            - "2K", "1K" (Only K value, default 1:1)
-            - "1280*1280", "2048*2048" (Directly specify resolution size, using * as the separator)
-            - "1280x1280" (Directly specify resolution size, using x as the separator)
+    参数：
+        input_str：支持以下输入格式：
+            - "2K 3:4"、"1K 16:9"（K 值加宽高比）
+            - "2K"、"1K"（只给 K 值，默认 1:1）
+            - "1280*1280"、"2048*2048"（直接指定分辨率，用 * 分隔）
+            - "1280x1280"（直接指定分辨率，用 x 分隔）
     
-    Returns:
-        str: Formatted resolution size string, e.g., "1536*2048"
+    返回值：
+        str：格式化后的分辨率字符串，例如 "1536*2048"
     
-    Raises:
-        ValueError: Invalid input format or out of range
+    可能抛出的异常：
+        ValueError：输入格式不合法或超出范围
     """
     
     input_str = input_str.strip().lower()
     
-    # Mode 1: Directly specify resolution size (e.g., "1280*1280" or "1280x1280")
+    # 方式一：直接指定分辨率，例如 "1280*1280" 或 "1280x1280"
     direct_pattern = r'^(\d+)[*x](\d+)$'
     match = re.match(direct_pattern, input_str)
     if match:
@@ -67,15 +67,15 @@ def parse_resolution(input_str):
         height = int(match.group(2))
         
         if not (768*768 <= width * height <= 2048*2048):
-            raise ValueError(f"Total pixel count must be within the range [768*768, 2048*2048], i.e., [{768*768}, {2048*2048}]. Current: {width}*{height}: {width*height}")
+            raise ValueError(f"总像素数需在 [768*768, 2048*2048] 即 [{768*768}, {2048*2048}] 之间，当前为 {width}*{height}: {width*height}")
         
         aspect_ratio = width / height
         if not (1/8 <= aspect_ratio <= 8):
-            raise ValueError(f"Aspect ratio must be within the range [1:8, 8:1]. Current: {aspect_ratio:.2f}")
+            raise ValueError(f"宽高比需在 [1:8, 8:1] 之间，当前为 {aspect_ratio:.2f}")
         
         return f"{width}*{height}"
     
-    # Mode 2: K + aspect ratio (e.g., "2K 3:4", "1K 16:9")
+    # 方式二：K 值加宽高比，例如 "2K 3:4"、"1K 16:9"
     k_ratio_pattern = r'^([124])k\s*(\d+):(\d+)$'
     match = re.match(k_ratio_pattern, input_str)
     if match:
@@ -89,20 +89,20 @@ def parse_resolution(input_str):
         width = int(round(base_unit * ratio_w))
         height = int(round(base_unit * ratio_h))
 
-        # Ensure it is even (required by some models)
+        # 保证是偶数，部分模型有此要求
         width = width if width % 2 == 0 else width - 1
         height = height if height % 2 == 0 else height - 1
 
         if not (768*768 <= width * height <= 2048*2048):
-            raise ValueError(f"Total pixel count must be within the range [768*768, 2048*2048], i.e., [{768*768}, {2048*2048}]. Calculated resolution is out of range: {width}*{height}: {width*height}")
+            raise ValueError(f"总像素数需在 [768*768, 2048*2048] 即 [{768*768}, {2048*2048}] 之间，算出的分辨率越界：{width}*{height}: {width*height}")
         
         aspect_ratio = width / height
         if not (1/8 <= aspect_ratio <= 8):
-            raise ValueError(f"Aspect ratio must be within the range [1:8, 8:1]. Current: {aspect_ratio:.2f}")
+            raise ValueError(f"宽高比需在 [1:8, 8:1] 之间，当前为 {aspect_ratio:.2f}")
         
         return f"{width}*{height}"
     
-    # Mode 3: K value only (e.g., "1K", "2K"), defaulting to a 1:1 aspect ratio
+    # 方式三：只给 K 值，例如 "1K"、"2K"，默认 1:1
     k_only_pattern = r'^([12])k$'
     match = re.match(k_only_pattern, input_str)
     if match:
@@ -112,30 +112,30 @@ def parse_resolution(input_str):
 
 
     raise ValueError(
-        f"Unsupported input format: '{input_str}'\n"
-        f"Supported input formats: \n"
-        f"  - K + aspect ratio: '2K 3:4', '1K 16:9', '2K 1:1'\n"
-        f"  - K value only: '1K', '2K' (defaulting to a 1:1 aspect ratio)\n"
-        f"  - Directly specify resolution size: '1280*1280', '2048*2048'"
+        f"不支持的输入格式：'{input_str}'\n"
+        f"支持的输入格式：\n"
+        f"  - K 值加宽高比：'2K 3:4'、'1K 16:9'、'2K 1:1'\n"
+        f"  - 只给 K 值：'1K'、'2K'（默认 1:1）\n"
+        f"  - 直接指定分辨率：'1280*1280'、'2048*2048'"
     )
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Parses resolution strings, supporting K value format or specific pixel formats',
+        description='解析分辨率描述，支持 K 值写法或具体像素写法',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog='''
-Example:
-  python parse_resolution.py '2K 3:4'       # output: 1536*2048
-  python parse_resolution.py '1K 16:9'      # output: 1696*960  
-  python parse_resolution.py '2048*2048'    # output: 2048*2048
-  python parse_resolution.py '1K'           # output: 1024*1024
+示例：
+  python parse_resolution.py '2K 3:4'       # 输出：1536*2048
+  python parse_resolution.py '1K 16:9'      # 输出：1696*960
+  python parse_resolution.py '2048*2048'    # 输出：2048*2048
+  python parse_resolution.py '1K'           # 输出：1024*1024
         '''.strip()
     )
     
     parser.add_argument(
         'input',
-        help='Resolution input string, format like: "2K 3:4", "2048*2048", "1K"'
+        help='分辨率描述，例如 "2K 3:4"、"2048*2048"、"1K"'
     )
     
     args = parser.parse_args()
@@ -145,7 +145,7 @@ Example:
         result = parse_resolution(input_str)
         print(result)
     except ValueError as e:
-        print(f"Failed: {e}", file=sys.stderr)
+        print(f"失败：{e}", file=sys.stderr)
         sys.exit(1)
 
 
